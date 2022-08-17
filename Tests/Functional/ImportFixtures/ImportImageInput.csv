@@ -1,0 +1,38 @@
+"wp_posts"
+,"ID","post_title","post_excerpt","post_type","post_mime_type"
+,123,"tree-in-the-center","This is not used.","attachment","image/jpeg"
+"wp_term_relationships"
+,"term_taxonomy_id","object_id"
+,"1","123"
+"wp_postmeta"
+,"post_id","meta_key","meta_value"
+,"123","_wp_attached_file","tree.jpg"
+,"123","_wp_attachment_image_alt","The tree has green leaves."
+"wp_terms"
+,"term_id","name","slug"
+,"1","Nature","nature"
+"pages"
+,"uid","pid","tstamp","crdate","cruser_id","title","doktype"
+,"1","0","1660280711","1660280708","1","Categories","254"
+,"2","0","1660280711","1660280708","1","Root page","1"
+"sys_file_storage"
+,"uid","pid","tstamp","crdate","cruser_id","deleted","description","name","driver","configuration","is_default","is_browsable","is_public","is_writable","is_online","auto_extract_metadata","processingfolder"
+,"1","0","1659958527","1659958527","0","0","This is the local fileadmin/ directory. This storage mount has been created automatically by TYPO3.","fileadmin","Local","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?>
+<T3FlexForms>
+    <data>
+        <sheet index=""sDEF"">
+            <language index=""lDEF"">
+                <field index=""basePath"">
+                    <value index=""vDEF"">fileadmin/</value>
+                </field>
+                <field index=""pathType"">
+                    <value index=""vDEF"">relative</value>
+                </field>
+                <field index=""caseSensitive"">
+                    <value index=""vDEF"">1</value>
+                </field>
+            </language>
+        </sheet>
+    </data>
+</T3FlexForms>","1","1","1","1","1","1",NULL
+

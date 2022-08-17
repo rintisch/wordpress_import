@@ -1,0 +1,13 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+  Rintisch\WordpressImport\:
+    resource: '../Classes/*'
+
+  Rintisch\WordpressImport\Command\Import:
+    tags:
+      - name: 'console.command'
+        command: 'wordpress_import:import'
