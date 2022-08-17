@@ -1,0 +1,51 @@
+"wp_posts"
+,"ID","post_title","post_type","post_name","post_status","post_parent","post_content"
+,123,"My page","page","my-page","publish",0,"<!-- wp:image {""align"":""center"",""id"":1240} -->
+<div class=""wp-block-image""><figure class=""aligncenter""><img src=""https://www.domain.com/wp-content/uploads/image-702x280.jpg"" alt=""Alt text"" class=""wp-image-100""/></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {""className"":""snippet""} -->
+<p class=""snippet"">This is the paragraph text with a <a href=""https://domain.com/subpage"">link</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class=""jumpnavi"">Inhaltsverzeichnis
+<p>&nbsp;</p>
+<ul>
+<li><a href=""#anchor01"">Headline 01</a></li>
+<li><a href=""#anchor02"">Headline 02</a></li>
+</ul>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:heading {""level"":3} -->
+<h3 id=""anchor01"">Headline 01</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {""level"":4} -->
+<h4>Subheadline 01</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>This is another paragraph.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:gallery {""ids"":[1,2],""columns"":2,""linkTo"":""file""} -->
+<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image01.jpg""><img src=""https://www.domain.com/wp-content/uploads/image01.jpg"" alt=""Alt image text"" data-id=""889"" class=""wp-image-1""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image02.jpg""><img src=""https://www.domain.com/wp-content/uploads/image02.jpg"" alt=""Alt image text"" data-id=""890"" class=""wp-image-2""/></a></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading {""level"":4} -->
+<h4>Subheadline 02</h4>
+<!-- /wp:heading -->
+
+<!-- wp:gallery {""ids"":[3,4],""columns"":2,""linkTo"":""file""} -->
+<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image03.jpg""><img src=""https://www.domain.com/wp-content/uploads/image03.jpg"" alt=""Alt image text"" data-id=""889"" class=""wp-image-3""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image04.jpg""><img src=""https://www.domain.com/wp-content/uploads/image04.jpg"" alt=""Alt image text"" data-id=""892"" class=""wp-image-4""/></a></figure></li></ul></figure>
+<!-- /wp:gallery -->
+"
+"wp_yoast_indexable"
+,"object_id","title","description","breadcrump_title"
+,123,"SEO Title","SEO description","Nav title"
+"pages"
+,"uid","pid","cruser_id","title","doktype"
+,"1","0","1","Categories","254"
+,"2","0","1","Root page","1"

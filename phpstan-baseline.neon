@@ -1,0 +1,36 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 2
+			path: Classes/Command/Import.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 1
+			path: Classes/Command/Import.php
+
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 3
+			path: Classes/Domain/Import/Storage.php
+
+		-
+			message: "#^Cannot cast mixed to string\\.$#"
+			count: 2
+			path: Classes/Domain/Import/Storage.php
+
+		-
+			message: "#^Property Rintisch\\\\WordpressImport\\\\Domain\\\\Import\\\\Storage\\:\\:\\$storage \\(TYPO3\\\\CMS\\\\Core\\\\Resource\\\\ResourceStorage\\) does not accept TYPO3\\\\CMS\\\\Core\\\\Resource\\\\ResourceStorage\\|null\\.$#"
+			count: 1
+			path: Classes/Domain/Import/Storage.php
+
+		-
+			message: "#^Cannot call method create\\(\\) on mixed\\.$#"
+			count: 1
+			path: Tests/Functional/ImportTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$command of class Symfony\\\\Component\\\\Console\\\\Tester\\\\CommandTester constructor expects Symfony\\\\Component\\\\Console\\\\Command\\\\Command, mixed given\\.$#"
+			count: 2
+			path: Tests/Functional/ImportTest.php

@@ -1,0 +1,12 @@
+"sys_file"
+,"uid","name","mime_type","extension","identifier","wp_id"
+,1,"tree.jpg","image/jpeg","jpg","/user_upload/Nature/tree.jpg",123
+"sys_file_metadata"
+,"uid","pid","file","title","description","alternative","categories"
+,1,0,1,"Tree in The Center","The tree has green leaves.","Tree in The Center",1
+"sys_category"
+,"pid","title"
+,1,"Nature"
+"sys_category_record_mm"
+,"tablenames","fieldname","uid_local","uid_foreign"
+,"sys_file_metadata","categories",1,1

@@ -1,0 +1,67 @@
+{
+    "name": "rintisch/wordpress-import",
+    "type": "typo3-cms-extension",
+    "description": "Import data from Wordpress tables",
+    "homepage": "https://github.com/rintisch",
+    "license": ["GPL-2.0-or-later"],
+    "keywords": ["TYPO3 CMS"],
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "Rintisch\\WordpressImport\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rintisch\\WordpressImport\\Tests\\": "Tests/"
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "symfony/console": "^5.2",
+        "typo3/cms-backend": "^11.5",
+        "typo3/cms-core": "^11.5",
+        "typo3/cms-seo": "^11.5"
+    },
+    "require-dev": {
+        "jangregor/phpstan-prophecy": "^1.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan": "^1.7",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.1",
+        "phpunit/phpunit": "^9.5",
+        "rector/rector": "0.13.0",
+        "saschaegerer/phpstan-typo3": "^1.1",
+        "symfony/css-selector": "^5.2",
+        "symfony/dom-crawler": "^6.1",
+        "symplify/easy-coding-standard": "^9.0",
+        "typo3/cms-fluid-styled-content": "^11.5",
+        "typo3/cms-form": "^11.5",
+        "typo3/testing-framework": "^6.16"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "mkdir -p .Build/web/typo3conf/ext/",
+            "[ -L .Build/web/typo3conf/ext/wordpress_import ] || ln -snvf ../../../../. .Build/web/typo3conf/ext/wordpress_import"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "typo3/cms-composer-installers": true,
+            "typo3/class-alias-loader": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "cms-package-dir": "{$vendor-dir}/typo3/cms",
+            "extension-key": "wordpress_import",
+            "web-dir": ".Build/web"
+        },
+        "branch-alias": {
+            "dev-main": "1.0.x-dev"
+        }
+    }
+}

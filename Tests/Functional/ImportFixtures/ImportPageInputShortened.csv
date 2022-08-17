@@ -1,0 +1,52 @@
+"wp_posts"
+,"ID","post_title","post_type","post_name","post_status","post_parent","post_content"
+,123,"My page","page","my-page","publish",0,"<!-- wp:image {""align"":""center"",""id"":1240} -->
+<div class=""wp-block-image""><figure class=""aligncenter""><img src=""https://www.schneider-schoenwalde.de/wp-content/uploads/moebelbau-702x280.jpg"" alt=""Möbelbau modern"" class=""wp-image-1240""/></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph {""className"":""snippet""} -->
+<p class=""snippet"">This is the paragraph text with a <a href=""/"">link</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<div class=""jumpnavi"">Inhaltsverzeichnis
+<p>&nbsp;</p>
+<ul>
+<li><a href=""#moderne-moebel"">Moderne Möbel</a></li>
+<li><a href=""#klassische-moebel"">Klassische Möbel</a></li>
+<li><a href=""#moebel-mit-hygieneanforderungen"">Möbel mit Hygieneanforderungen</a></li>
+</ul>
+</div>
+<!-- /wp:html -->
+
+<!-- wp:heading {""level"":3} -->
+<h3 id=""moderne-moebel"">Moderne Möbel</h3>
+<!-- /wp:heading -->
+
+<!-- wp:heading {""level"":4} -->
+<h4>Raumteiler aus Kirschbaum</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Individuell gefertigter Raumteiler mit Glas- und Metallgitterelementen. Der Aufbau wirkt damit leicht und entfaltet dennoch seinen Zweck. Zur weiteren Auflockerung des Elements wurden im unteren Bereich Kasettenfüllungen realisiert.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:gallery {""ids"":[889,890,888,887],""columns"":2,""linkTo"":""file""} -->
+<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-kirschbaum.jpg""><img src=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-kirschbaum.jpg"" alt=""Raumteiler aus Kirschbaum mit Glas- &amp; Gitterelementen"" data-id=""889"" class=""wp-image-889""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-teilansicht.jpg""><img src=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-teilansicht.jpg"" alt=""Gitterelemente sind stets aus Metall."" data-id=""890"" class=""wp-image-890""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-glaselemente-metallgitter.jpg""><img src=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-glaselemente-metallgitter.jpg"" alt=""Durchlässigkeit dank der filigranen Ausführung mit Glas und Gittern"" data-id=""888"" class=""wp-image-888""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-gitter.jpg""><img src=""https://www.schneider-schoenwalde.de/wp-content/uploads/raumteiler-gitter.jpg"" alt=""Perfekte Oberflächenbehandlung im Detail"" data-id=""887"" class=""wp-image-887""/></a></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading {""level"":4} -->
+<h4>Schreibtisch und passendes Bücherregal</h4>
+<!-- /wp:heading -->
+
+<!-- wp:gallery {""ids"":[2146,2144,2147,2145,2141,2143,2149,2142],""columns"":2,""linkTo"":""file""} -->
+<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><img data-id=""2146"" class=""wp-image-2146""/></figure></li><li class=""blocks-gallery-item""><figure><img data-id=""2144"" class=""wp-image-2144""/></figure></li><li class=""blocks-gallery-item""><figure><img data-id=""2147"" class=""wp-image-2147""/></figure></li><li class=""blocks-gallery-item""><figure><img data-id=""2145"" class=""wp-image-2145""/></figure></li><li class=""blocks-gallery-item""><figure><img data-id=""2141"" class=""wp-image-2141""/></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.schneider-schoenwalde.de/wp-content/uploads/platte-unterteil-schwarz.jpg""><img src=""https://www.schneider-schoenwalde.de/wp-content/uploads/platte-unterteil-schwarz.jpg"" alt=""Das Unterteil endet mit einer schwarzen Echtholzplatte"" data-id=""2143"" class=""wp-image-2143""/></a></figure></li><li class=""blocks-gallery-item""><figure><img data-id=""2149"" class=""wp-image-2149""/></figure></li><li class=""blocks-gallery-item""><figure><img data-id=""2142"" class=""wp-image-2142""/></figure></li></ul></figure>
+<!-- /wp:gallery -->
+"
+"wp_yoast_indexable"
+,"object_id","title","description","breadcrump_title"
+,123,"SEO Title","SEO description","Nav title"
+"pages"
+,"uid","pid","cruser_id","title","doktype"
+,"1","0","1","Categories","254"
+,"2","0","1","Root page","1"
