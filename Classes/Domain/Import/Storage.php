@@ -215,8 +215,7 @@ class Storage
                 ['file' => $fileUid],
             );
 
-        // add entry to `sys_category_record_mm` with
-        // tablenames = sys_file_metadata    and fieldname = categories and  uid_local = UID of category and uid_foreign = UID of image
+        // add entry to `sys_category_record_mm`
         $connectionPoolRecordMm = clone $this->connectionPool;
 
         $connectionPoolRecordMm
@@ -401,14 +400,17 @@ class Storage
         $data = [];
         $data['tt_content'] = [];
 
+        $counter = 1;
+
         foreach ($clusterMatrix as $cluster) {
+            $counter++;
             $fields = [];
             $fields['pid'] = $pid;
 
-            $identifierRaw = '';
+            $ceIdentifier = $this->getIdentifier((string)$counter);
 
             foreach ($cluster as $index) {
-                $identifierRaw .= (string)$index;
+
                 $element = $pageContent[$index];
 
                 switch ($element['type']) {
@@ -429,10 +431,13 @@ class Storage
                         $fields['imageorient'] = $galleryBeneathText;
                         $fields['imagecols'] = (int)$element['content']['imagecols'];
 
-                        // $fields['assets'] = count(explode(',', $element['content']['assets']));
-
-                        // check whether images exist
-                        // write into sys_file_reference
+                        [$fields, $data] = $this->addSysFileReference(
+                            explode(',', $element['content']['assets']),
+                            $fields,
+                            $data,
+                            $pid,
+                            $ceIdentifier
+                        );
                         break;
 
                     case 'menu_section':
@@ -441,13 +446,15 @@ class Storage
                 }
             }
 
-            $identifier = $this->getIdentifier($identifierRaw);
-
-            $data['tt_content'][$identifier] = $fields;
+            $data['tt_content'][$ceIdentifier] = $fields;
         }
 
         $dataHandler->start($data, []);
         $dataHandler->process_datamap();
+
+        if ($dataHandler->errorLog) {
+            throw new \RuntimeException(sprintf('DataHandler has errors: %s', $dataHandler->errorLog), 1620735223);
+        }
     }
 
     private function getIdentifier(string $id): string
@@ -456,5 +463,67 @@ class Storage
 
         // Ensure new ID is max 30, as this is max length of the sys_log column
         return substr($identifier, 0, 30);
+    }
+
+    private function getFileByWpId(string $wpFileId): int
+    {
+        $connectionPool = clone $this->connectionPool;
+
+        $result = $connectionPool
+            ->getConnectionForTable('sys_file')
+            ->select(
+                ['uid'],
+                'sys_file',
+                [
+                    'wp_id' => (int)$wpFileId,
+                ]
+            )
+            ->fetchAssociative();
+
+        return $result ? (int)$result['uid'] : 0;
+    }
+
+    private function addSysFileReference(
+        array $wpFileIds,
+        array $fields,
+        array $data,
+        int $pid,
+        string $ceIdentifier
+    ) {
+
+        foreach ($wpFileIds as $wpFileId) {
+
+            // check whether images exist
+            $fileUid = (string)$this->getFileByWpId($wpFileId);
+            if (!$fileUid) {
+                continue;
+            }
+
+            [$data, $newId] = $this->addImageReference($fileUid, $pid, $ceIdentifier, $data);
+
+            $fields['assets'] = $fields['assets'] ? $fields['assets'] . ',' . $newId : $newId;
+        }
+
+        return [
+            $fields,
+            $data
+        ];
+    }
+
+    private function addImageReference(string $fileUid, int $pid, string $ceIdentifier, array $data): array
+    {
+        if (!$fileUid) {
+            return $data;
+        }
+
+        $newId = $this->getIdentifier($fileUid);
+
+        $data['sys_file_reference'][$newId] = [
+            'uid_local' => 'sys_file_' . $fileUid,
+            'hidden' => 0,
+            'pid' => $pid,
+        ];
+
+        return [$data, $newId];
     }
 }
