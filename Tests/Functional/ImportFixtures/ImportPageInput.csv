@@ -30,16 +30,16 @@
 <p>This is another paragraph.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:gallery {""ids"":[1,2],""columns"":2,""linkTo"":""file""} -->
-<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image01.jpg""><img src=""https://www.domain.com/wp-content/uploads/image01.jpg"" alt=""Alt image text"" data-id=""889"" class=""wp-image-1""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image02.jpg""><img src=""https://www.domain.com/wp-content/uploads/image02.jpg"" alt=""Alt image text"" data-id=""890"" class=""wp-image-2""/></a></figure></li></ul></figure>
+<!-- wp:gallery {""ids"":[101,102],""columns"":2,""linkTo"":""file""} -->
+<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image101.jpg""><img src=""https://www.domain.com/wp-content/uploads/image01.jpg"" alt=""Alt image text"" data-id=""101"" class=""wp-image-1""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image102.jpg""><img src=""https://www.domain.com/wp-content/uploads/image02.jpg"" alt=""Alt image text"" data-id=""102"" class=""wp-image-2""/></a></figure></li></ul></figure>
 <!-- /wp:gallery -->
 
 <!-- wp:heading {""level"":4} -->
 <h4>Subheadline 02</h4>
 <!-- /wp:heading -->
 
-<!-- wp:gallery {""ids"":[3,4],""columns"":2,""linkTo"":""file""} -->
-<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image03.jpg""><img src=""https://www.domain.com/wp-content/uploads/image03.jpg"" alt=""Alt image text"" data-id=""889"" class=""wp-image-3""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image04.jpg""><img src=""https://www.domain.com/wp-content/uploads/image04.jpg"" alt=""Alt image text"" data-id=""892"" class=""wp-image-4""/></a></figure></li></ul></figure>
+<!-- wp:gallery {""ids"":[103,104],""columns"":2,""linkTo"":""file""} -->
+<figure class=""wp-block-gallery columns-2 is-cropped""><ul class=""blocks-gallery-grid""><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image103.jpg""><img src=""https://www.domain.com/wp-content/uploads/image03.jpg"" alt=""Alt image text"" data-id=""103"" class=""wp-image-3""/></a></figure></li><li class=""blocks-gallery-item""><figure><a href=""https://www.domain.com/wp-content/uploads/image104.jpg""><img src=""https://www.domain.com/wp-content/uploads/image04.jpg"" alt=""Alt image text"" data-id=""104"" class=""wp-image-4""/></a></figure></li></ul></figure>
 <!-- /wp:gallery -->
 "
 "wp_yoast_indexable"
@@ -49,3 +49,29 @@
 ,"uid","pid","cruser_id","title","doktype"
 ,"1","0","1","Categories","254"
 ,"2","0","1","Root page","1"
+"sys_file"
+,"uid","pid","storage","type","wp_id"
+,1,0,1,2,101
+,2,0,1,2,102
+,3,0,1,2,103
+,4,0,1,2,104
+"sys_file_storage"
+,"uid","pid","tstamp","crdate","cruser_id","deleted","description","name","driver","configuration","is_default","is_browsable","is_public","is_writable","is_online","auto_extract_metadata","processingfolder"
+,"1","0","1659958527","1659958527","0","0","This is the local fileadmin/ directory. This storage mount has been created automatically by TYPO3.","fileadmin","Local","<?xml version=""1.0"" encoding=""utf-8"" standalone=""yes"" ?>
+<T3FlexForms>
+    <data>
+        <sheet index=""sDEF"">
+            <language index=""lDEF"">
+                <field index=""basePath"">
+                    <value index=""vDEF"">fileadmin/</value>
+                </field>
+                <field index=""pathType"">
+                    <value index=""vDEF"">relative</value>
+                </field>
+                <field index=""caseSensitive"">
+                    <value index=""vDEF"">1</value>
+                </field>
+            </language>
+        </sheet>
+    </data>
+</T3FlexForms>","1","1","1","1","1","1",NULL
