@@ -81,7 +81,8 @@ class ImportTest extends TestCase
         $commandTester->execute([
             'wpFilesDirectory' => 'user_upload/wp-uploads/',
             'categoryDirectoryUid' => '1',
-            'rootPid' => '2'
+            'rootPid' => '2',
+            'baseUrl' => 'https://domain.com'
         ]);
 
         $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportImage/Output.csv');
@@ -99,7 +100,8 @@ class ImportTest extends TestCase
         $commandTester->execute([
             'wpFilesDirectory' => 'user_upload/wp-uploads/',
             'categoryDirectoryUid' => '1',
-            'rootPid' => '2'
+            'rootPid' => '2',
+            'baseUrl' => 'https://domain.com'
         ]);
 
         $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPage/Output.csv');
@@ -117,7 +119,8 @@ class ImportTest extends TestCase
         $commandTester->execute([
             'wpFilesDirectory' => 'user_upload/wp-uploads/',
             'categoryDirectoryUid' => '1',
-            'rootPid' => '2'
+            'rootPid' => '2',
+            'baseUrl' => 'https://domain.com'
         ]);
 
         $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageWithSubPage/Output.csv');
@@ -135,9 +138,29 @@ class ImportTest extends TestCase
         $commandTester->execute([
             'wpFilesDirectory' => 'user_upload/wp-uploads/',
             'categoryDirectoryUid' => '1',
-            'rootPid' => '2'
+            'rootPid' => '2',
+            'baseUrl' => 'https://domain.com'
         ]);
 
         $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageWithSubSubPage/Output.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function postProcessLinks(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/PostProcessLinks/Input.csv');
+
+        $importer = $this->getContainer()->get(Import::class);
+        $commandTester = new CommandTester($importer);
+        $commandTester->execute([
+            'wpFilesDirectory' => 'user_upload/wp-uploads/',
+            'categoryDirectoryUid' => '1',
+            'rootPid' => '2',
+            'baseUrl' => 'https://domain.com'
+        ]);
+
+        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/PostProcessLinks/Output.csv');
     }
 }

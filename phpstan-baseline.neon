@@ -7,12 +7,12 @@ parameters:
 
 		-
 			message: "#^Cannot cast mixed to string\\.$#"
-			count: 1
+			count: 2
 			path: Classes/Command/Import.php
 
 		-
 			message: "#^Cannot cast mixed to int\\.$#"
-			count: 4
+			count: 6
 			path: Classes/Domain/Import/Storage.php
 
 		-
@@ -32,5 +32,5 @@ parameters:
 
 		-
 			message: "#^Parameter \\#1 \\$command of class Symfony\\\\Component\\\\Console\\\\Tester\\\\CommandTester constructor expects Symfony\\\\Component\\\\Console\\\\Command\\\\Command, mixed given\\.$#"
-			count: 4
+			count: 5
 			path: Tests/Functional/ImportTest.php

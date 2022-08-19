@@ -49,6 +49,8 @@ class Importer
 
         $this->importPages($import);
 
+        $this->postProcessContent($import);
+
         return 0;
     }
 
@@ -89,11 +91,14 @@ class Importer
 
     public function importPages(Import $import): void
     {
-        $pages = $this->storage->getAllPages();
+        $pages = $this->storage->getAllWpPages();
 
         $mapping = [0 => $import->getRootPid()];
 
-        while(count($pages)){
+        // Recursively store pages to create at least partly
+        // a page tree (this concept exists not in WP, so you
+        // will need to rearrange it at the end).
+        while (count($pages)) {
             $pages = $this->processPagesWithParent($pages, $mapping);
             $mapping = $this->storage->getPageMappingWpIdToUid();
         }
@@ -123,14 +128,42 @@ class Importer
     {
         foreach ($pages as $page) {
 
-            $seoData = $this->storage->getSeoData($page['ID']);
+            $seoData = $this->storage->getWpSeoData($page['ID']);
             $pid = $this->storage->createPage($page, $seoData);
 
             [$pageContent, $clusterMatrix] = $this->contentExtractor->extract($page['post_content']);
 
             $this->storage->createContentElements($pageContent, $clusterMatrix, $pid);
-            // move on :
-            // store guids for convertion of links
+        }
+    }
+
+    private function postProcessContent(Import $import): void
+    {
+        // loop through all content entries
+        $contentElements = $this->storage->getAllTypo3Contents();
+        $baseUrl = $import->getBaseUrl();
+        $baseUrl = str_replace(['/', '.'], ['\/', '\.'], $baseUrl);
+        foreach ($contentElements as $contentElement) {
+            $bodytext = $contentElement['bodytext'];
+            if (!$bodytext) {
+                continue;
+            }
+
+            // extract links with regex, U = ungreedy
+            $wpLinkPattern = '/(<a.*href=")(' . $baseUrl . '\/.*)(".*>)(.*)(<\/a>)/U';
+
+            preg_match_all($wpLinkPattern, $bodytext, $linkMatches, PREG_SET_ORDER);
+
+            foreach ($linkMatches as $match) {
+
+                $uid = $this->storage->getUidByUrl($match[2]);
+
+                $newHref = 't3://page?uid=' . $uid;
+                $newLink = $match[1] . $newHref . $match[3] . $match[4] . $match[5];
+                $bodytext = str_replace($match[0], $newLink, $bodytext);
+
+            }
+            $this->storage->storeBodyOfContentelement($contentElement['uid'], $bodytext);
         }
     }
 }

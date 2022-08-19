@@ -41,6 +41,7 @@ CREATE TABLE wp_yoast_indexable
     title            text       DEFAULT NULL,
     description      mediumtext DEFAULT NULL,
     breadcrump_title text       DEFAULT NULL,
+    permalink        longtext   DEFAULT NULL,
 );
 
 CREATE TABLE sys_file

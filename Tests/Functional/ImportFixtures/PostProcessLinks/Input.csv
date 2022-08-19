@@ -1,0 +1,14 @@
+"wp_posts"
+,"ID","post_title","post_type","post_name","post_status","post_parent","post_content"
+,123,"My page","page","my-page","publish",0,"<!-- wp:paragraph {""className"":""snippet""} --><p class=""snippet"">This is a paragraph text with a <a href=""https://domain.com/subpage"">link</a> and a <a href=""https://domain.com/another-subpage"">link to itself</a>.</p>
+<!-- /wp:paragraph -->"
+,124,"My sub page","page","my-sub-page","publish",123,"<!-- wp:paragraph {""className"":""snippet""} -->
+<p class=""snippet"">This is brand new paragraph text with a <a href=""https://domain.com/another-subpage"">link</a>. This is another paragraph text with an <a href=""https://external.com/subpage"">external link</a>.</p>
+<!-- /wp:paragraph -->"
+"wp_yoast_indexable"
+,"object_id","title","description","breadcrump_title","permalink"
+,123,"SEO Title","SEO description","Nav title","https://domain.com/another-subpage"
+,124,"SEO Title sub","SEO description sub","Nav title sub","https://domain.com/subpage"
+"pages"
+,"uid","pid","cruser_id","title","doktype"
+,"2","0","1","Root page","1"

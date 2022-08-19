@@ -161,6 +161,7 @@ class ContentExtractor
      *  headline + paragraph
      *  headline + gallery
      *  paragraph + gallery
+     *  paragraph + paragraph
      *
      * Creates a cluster matrix like e.g.
      * [
@@ -184,6 +185,7 @@ class ContentExtractor
             ],
             'paragraph' => [
                 'gallery',
+                'paragraph'
             ]
         ];
 

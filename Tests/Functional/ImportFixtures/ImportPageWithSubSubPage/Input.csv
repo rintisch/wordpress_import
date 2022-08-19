@@ -1,12 +1,12 @@
 "wp_posts"
 ,"ID","post_title","post_type","post_name","post_status","post_parent","post_content"
-,123,"My page","page","my-page","publish",0,"<!-- wp:paragraph {""className"":""snippet""} --><p class=""snippet"">This is a paragraph text with a <a href=""https://domain.com/subpage"">link</a>.</p>
+,123,"My page","page","my-page","publish",0,"<!-- wp:paragraph {""className"":""snippet""} --><p class=""snippet"">This is a paragraph text.</p>
 <!-- /wp:paragraph -->"
 ,124,"My sub page","page","my-sub-page","publish",123,"<!-- wp:paragraph {""className"":""snippet""} -->
-<p class=""snippet"">This is another paragraph text with a <a href=""https://domain.com/subpage"">link</a>.</p>
+<p class=""snippet"">This is another paragraph text.</p>
 <!-- /wp:paragraph -->"
 ,125,"My sub sub page","page","my-sub-sub-page","publish",124,"<!-- wp:paragraph {""className"":""snippet""} -->
-<p class=""snippet"">This is even another paragraph text with a <a href=""https://domain.com/subpage"">link</a>.</p>
+<p class=""snippet"">This is even another paragraph text.</p>
 <!-- /wp:paragraph -->"
 "wp_yoast_indexable"
 ,"object_id","title","description","breadcrump_title"

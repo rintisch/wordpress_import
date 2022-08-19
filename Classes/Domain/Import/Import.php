@@ -26,7 +26,8 @@ class Import
     public function __construct(
         private string $importDirectory,
         private int $categoryStorageUid,
-        private int $rootPid
+        private int $rootPid,
+        private string $baseUrl
     ) {
     }
 
@@ -52,5 +53,10 @@ class Import
     public function getRootPid(): int
     {
         return $this->rootPid;
+    }
+
+    public function getBaseUrl(): string
+    {
+        return rtrim($this->baseUrl, '/');
     }
 }
