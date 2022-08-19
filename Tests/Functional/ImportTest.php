@@ -74,7 +74,7 @@ class ImportTest extends TestCase
      */
     public function importImages(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/ImportImageInput.csv');
+        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/ImportImage/Input.csv');
 
         $importer = $this->getContainer()->get(Import::class);
         $commandTester = new CommandTester($importer);
@@ -84,15 +84,15 @@ class ImportTest extends TestCase
             'rootPid' => '2'
         ]);
 
-        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportImageOutput.csv');
+        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportImage/Output.csv');
     }
 
     /**
      * @test
      */
-    public function importPages(): void
+    public function importPage(): void
     {
-        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageInput.csv');
+        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/ImportPage/Input.csv');
 
         $importer = $this->getContainer()->get(Import::class);
         $commandTester = new CommandTester($importer);
@@ -102,6 +102,42 @@ class ImportTest extends TestCase
             'rootPid' => '2'
         ]);
 
-        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageOutput.csv');
+        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPage/Output.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function importPageWithSubPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageWithSubPage/Input.csv');
+
+        $importer = $this->getContainer()->get(Import::class);
+        $commandTester = new CommandTester($importer);
+        $commandTester->execute([
+            'wpFilesDirectory' => 'user_upload/wp-uploads/',
+            'categoryDirectoryUid' => '1',
+            'rootPid' => '2'
+        ]);
+
+        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageWithSubPage/Output.csv');
+    }
+
+    /**
+     * @test
+     */
+    public function importPageWithSubSubPage(): void
+    {
+        $this->importCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageWithSubSubPage/Input.csv');
+
+        $importer = $this->getContainer()->get(Import::class);
+        $commandTester = new CommandTester($importer);
+        $commandTester->execute([
+            'wpFilesDirectory' => 'user_upload/wp-uploads/',
+            'categoryDirectoryUid' => '1',
+            'rootPid' => '2'
+        ]);
+
+        $this->assertCSVDataSet(__DIR__ . '/ImportFixtures/ImportPageWithSubSubPage/Output.csv');
     }
 }

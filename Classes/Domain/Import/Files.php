@@ -23,7 +23,6 @@ namespace Rintisch\WordpressImport\Domain\Import;
  */
 
 use TYPO3\CMS\Core\Core\Environment;
-use TYPO3\CMS\Core\Resource\StorageRepository;
 
 /**
  *

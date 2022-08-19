@@ -91,24 +91,46 @@ class Importer
     {
         $pages = $this->storage->getAllPages();
 
-        foreach ($pages as $page) {
+        $mapping = [0 => $import->getRootPid()];
 
-            // import in first step only pages without parent pages
-            if ((int)$page['post_parent'] !== 0) {
+        while(count($pages)){
+            $pages = $this->processPagesWithParent($pages, $mapping);
+            $mapping = $this->storage->getPageMappingWpIdToUid();
+        }
+    }
+
+    private function processPagesWithParent(array $pages, array $mapping): array
+    {
+        // Import in first step only pages without parent pages
+        $wpPagesParentExists = [];
+        $wpPagesParentMissing = [];
+
+        foreach ($pages as $page) {
+            if ($mapping[$page['post_parent']]) {
+                $page['pid'] = $mapping[$page['post_parent']];
+                $wpPagesParentExists[] = $page;
                 continue;
             }
+            $wpPagesParentMissing[] = $page;
+        }
+
+        $this->storePages($wpPagesParentExists);
+
+        return $wpPagesParentMissing;
+    }
+
+    private function storePages(array $pages): void
+    {
+        foreach ($pages as $page) {
 
             $seoData = $this->storage->getSeoData($page['ID']);
-
-            $rootPid = $import->getRootPid();
-            $pid = $this->storage->createPage($page, $seoData, $rootPid);
+            $pid = $this->storage->createPage($page, $seoData);
 
             [$pageContent, $clusterMatrix] = $this->contentExtractor->extract($page['post_content']);
 
             $this->storage->createContentElements($pageContent, $clusterMatrix, $pid);
             // move on :
             // store guids for convertion of links
-            // move through notes and act according to their content
         }
     }
 }
