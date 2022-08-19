@@ -5,7 +5,7 @@
 ,3,2,"My page","/my-page",123,0,"SEO Title","Nav title","SEO description"
 "tt_content"
 ,"uid","pid","hidden","sorting","CType","header","header_layout","bodytext","imageorient","imagecols"
-,5,3,0,16,"textmedia","","0","<p class=""snippet"">This is the paragraph text with a <a href=""https://domain.com/subpage"">link</a>.</p>",0,2
+,5,3,0,16,"textmedia","","0","<p class=""snippet"">This is the paragraph text.</p>",0,2
 ,4,3,0,32,"menu_section","","0","",0,2
 ,3,3,0,64,"textmedia","Headline 01","3","",0,2
 ,2,3,0,128,"textmedia","Subheadline 01","4","<p>This is another paragraph.</p>",8,2

@@ -5,7 +5,7 @@
 <!-- /wp:image -->
 
 <!-- wp:paragraph {""className"":""snippet""} -->
-<p class=""snippet"">This is the paragraph text with a <a href=""https://domain.com/subpage"">link</a>.</p>
+<p class=""snippet"">This is the paragraph text.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:html -->

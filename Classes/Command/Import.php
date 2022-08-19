@@ -58,6 +58,10 @@ class Import extends Command
             ->addArgument('rootPid',
                 InputArgument::REQUIRED,
                 'UID of page which shall be root for import.'
+            )
+            ->addArgument('baseUrl',
+                InputArgument::REQUIRED,
+                'Domain of the page as it is used in WordPress, e.g. https://www.domain.com'
             );
     }
 
@@ -68,7 +72,8 @@ class Import extends Command
         $import = new ImportModel(
             (string)$input->getArgument('wpFilesDirectory'),
             (int)$input->getArgument('categoryDirectoryUid'),
-            (int)$input->getArgument('rootPid')
+            (int)$input->getArgument('rootPid'),
+            (string)$input->getArgument('baseUrl')
         );
 
         return $this->importer->import($import);

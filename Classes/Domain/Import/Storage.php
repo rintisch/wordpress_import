@@ -312,7 +312,7 @@ class Storage
             );
     }
 
-    public function getAllPages(): array
+    public function getAllWpPages(): array
     {
         $connectionPool = clone $this->connectionPool;
 
@@ -335,7 +335,7 @@ class Storage
             ->fetchAllAssociative();
     }
 
-    public function getSeoData(int $wpId): array
+    public function getWpSeoData(int $wpId): array
     {
         $connectionPool = clone $this->connectionPool;
 
@@ -420,7 +420,10 @@ class Storage
 
                     case 'paragraph':
                         $fields['CType'] = 'textmedia';
-                        $fields['bodytext'] = $element['content']['text'];
+                        $fields['bodytext'] =
+                            $fields['bodytext'] ?
+                                $fields['bodytext'] . $element['content']['text'] :
+                                $element['content']['text'];
                         break;
 
                     case 'gallery':
@@ -451,7 +454,7 @@ class Storage
         $dataHandler->process_datamap();
 
         if ($dataHandler->errorLog) {
-            throw new \RuntimeException(sprintf('DataHandler has errors: %s', implode(' ',$dataHandler->errorLog)), 1620735223);
+            throw new \RuntimeException(sprintf('DataHandler has errors: %s', implode(' ', $dataHandler->errorLog)), 1620735223);
         }
     }
 
@@ -539,13 +542,71 @@ class Storage
             ->fetchAllAssociative();
 
         $mapping = [];
-        foreach ($result as $page){
-            if($page['wp_id'] === 0){
+        foreach ($result as $page) {
+            if ($page['wp_id'] === 0) {
                 continue;
             }
             $mapping[$page['wp_id']] = $page['uid'];
         }
 
         return $mapping;
+    }
+
+    public function getAllTypo3Contents(): array
+    {
+        $connectionPool = clone $this->connectionPool;
+
+        $result = $connectionPool
+            ->getConnectionForTable('tt_content')
+            ->select(
+                ['uid', 'bodytext'],
+                'tt_content',
+                ['CType' => 'textmedia']
+            )
+            ->fetchAllAssociative();
+
+        return $result ?: [];
+    }
+
+    public function getUidByUrl(string $internalLinkMatch): int
+    {
+        $connectionPoolYoast = clone $this->connectionPool;
+        $connectionPoolPage = clone $this->connectionPool;
+
+        $result = $connectionPoolYoast
+            ->getConnectionForTable('wp_yoast_indexable')
+            ->select(
+                ['object_id'],
+                'wp_yoast_indexable',
+                ['permalink' => $internalLinkMatch]
+            )
+            ->fetchAssociative();
+
+        $objectId = $result ? (int)$result['object_id'] : 0;
+
+        $connectionPoolYoast = clone $this->connectionPool;
+        $result = $connectionPoolPage
+            ->getConnectionForTable('pages')
+            ->select(
+                ['uid'],
+                'pages',
+                ['wp_id' => $objectId]
+            )
+            ->fetchAssociative();
+
+        return $result ? (int)$result['uid'] : 0;
+    }
+
+    public function storeBodyOfContentelement(int $uid, string $bodytext): void
+    {
+        $connectionPool = clone $this->connectionPool;
+        $connectionPool
+            ->getConnectionForTable('tt_content')
+            ->update(
+                'tt_content',
+                ['bodytext' => $bodytext],
+                ['uid' => $uid],
+            );
+
     }
 }
