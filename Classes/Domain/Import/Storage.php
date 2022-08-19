@@ -25,7 +25,6 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\DataHandling\DataHandler;
 use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\Folder;
-use TYPO3\CMS\Core\Resource\ProcessedFile;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 
@@ -366,7 +365,7 @@ class Storage
         ];
     }
 
-    public function createPage(array $pageData, array $seoData, int $pid): int
+    public function createPage(array $pageData, array $seoData): int
     {
 
         $dataHandler = clone $this->dataHandler;
@@ -374,9 +373,8 @@ class Storage
         $data = [
             'pages' => [
                 'NEW_1' => [
-                    'pid' => $pid,
+                    'pid' => $pageData['pid'],
                     'title' => $pageData['post_title'],
-                    'slug' => $pageData['post_name'],
                     'wp_id' => $pageData['ID'],
                     'hidden' => $pageData['post_status'] !== 'publish' ? 1 : 0,
                     'seo_title' => $seoData['seo_title'],
@@ -453,7 +451,7 @@ class Storage
         $dataHandler->process_datamap();
 
         if ($dataHandler->errorLog) {
-            throw new \RuntimeException(sprintf('DataHandler has errors: %s', $dataHandler->errorLog), 1620735223);
+            throw new \RuntimeException(sprintf('DataHandler has errors: %s', implode(' ',$dataHandler->errorLog)), 1620735223);
         }
     }
 
@@ -489,7 +487,7 @@ class Storage
         array $data,
         int $pid,
         string $ceIdentifier
-    ) {
+    ): array {
 
         foreach ($wpFileIds as $wpFileId) {
 
@@ -525,5 +523,29 @@ class Storage
         ];
 
         return [$data, $newId];
+    }
+
+    public function getPageMappingWpIdToUid(): array
+    {
+        $connectionPool = clone $this->connectionPool;
+
+        $result = $connectionPool
+            ->getConnectionForTable('pages')
+            ->select(
+                ['uid', 'wp_id'],
+                'pages',
+                []
+            )
+            ->fetchAllAssociative();
+
+        $mapping = [];
+        foreach ($result as $page){
+            if($page['wp_id'] === 0){
+                continue;
+            }
+            $mapping[$page['wp_id']] = $page['uid'];
+        }
+
+        return $mapping;
     }
 }

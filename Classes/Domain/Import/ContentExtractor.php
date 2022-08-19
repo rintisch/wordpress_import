@@ -278,7 +278,7 @@ class ContentExtractor
     {
         if (
             $domElement->nodeName === 'div' &&
-            preg_match('/.*jumpnavi.*/', $this->dom->saveHTML($domElement))
+            preg_match('/.*jumpnavi.*/', $this->dom->saveHTML($domElement) ?: '')
         ) {
             $data[] = [
                 'type' => 'menu_section',
