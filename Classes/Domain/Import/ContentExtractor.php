@@ -52,7 +52,7 @@ class ContentExtractor
 
         // Page has no content, so return empty array.
         if (!$body) {
-            return [];
+            return [[],[]];
         }
 
         $pageContent = $this->extractPageContent($body);
@@ -67,14 +67,16 @@ class ContentExtractor
         $content = $this->convertUntaggedTextToParagraph($content);
 
         if (!$content) {
-            return NULL;
+            return null;
         }
         $convertedContent = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
 
-        $this->dom->loadHTML($convertedContent);
-
-        $body = $this->dom->getElementsByTagName('html')[0]->getElementsByTagName('body')[0];
-
+        try {
+            $this->dom->loadHTML($convertedContent, LIBXML_NOERROR);
+            $body = $this->dom->getElementsByTagName('html')[0]->getElementsByTagName('body')[0];
+        } catch (\Exception $e) {
+            $body = null;
+        }
         return $body;
     }
 
@@ -137,7 +139,7 @@ class ContentExtractor
                 continue;
             }
 
-            $data = $this->convertParagraph($domElement, $data);
+            $data = $this->convertText($domElement, $data);
             $data = $this->convertHeadline($domElement, $data);
             $data = $this->convertGallery($domElement, $data);
             $data = $this->convertMenuSection($domElement, $data);
@@ -220,14 +222,19 @@ class ContentExtractor
         return $clusteredData;
     }
 
-    private function convertParagraph(\DOMNode $domElement, array $data): array
+    private function convertText(\DOMNode $domElement, array $data): array
     {
+        $allowedTags = ['p', 'ul', 'table', 'strong'];
 
-        if ($domElement->nodeName === 'p') {
+        if (in_array($domElement->nodeName, $allowedTags)) {
+
+            $text = $this->dom->saveHTML($domElement);
+
+            $text = $domElement->nodeName === 'strong' ? '<p>' . $text . '</p>' : $text;
             $data[] = [
                 'type' => 'paragraph',
                 'content' => [
-                    'text' => $this->dom->saveHTML($domElement),
+                    'text' => $text,
                 ]
             ];
         }
@@ -262,6 +269,10 @@ class ContentExtractor
         ) {
             $patternForIdsAndCols = '/.*"ids":\[(.*)\].*"columns":(\d).*/';
             preg_match($patternForIdsAndCols, $domElement->nodeValue ?: '', $output);
+
+            if(!$output) {
+                return $data;
+            }
             $ids = $output[1];
             $imagecols = $output[2];
 

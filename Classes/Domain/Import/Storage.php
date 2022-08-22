@@ -400,6 +400,10 @@ class Storage
 
         $counter = 1;
 
+        if (count($clusterMatrix) === 0) {
+            return;
+        }
+
         foreach ($clusterMatrix as $cluster) {
             $counter++;
             $fields = [];
@@ -421,7 +425,7 @@ class Storage
                     case 'paragraph':
                         $fields['CType'] = 'textmedia';
                         $fields['bodytext'] =
-                            $fields['bodytext'] ?
+                            array_key_exists('bodytext', $fields) ?
                                 $fields['bodytext'] . $element['content']['text'] :
                                 $element['content']['text'];
                         break;
@@ -502,7 +506,7 @@ class Storage
 
             [$data, $newId] = $this->addImageReference($fileUid, $pid, $ceIdentifier, $data);
 
-            $fields['assets'] = $fields['assets'] ? $fields['assets'] . ',' . $newId : $newId;
+            $fields['assets'] = array_key_exists('assets', $fields) ? $fields['assets'] . ',' . $newId : $newId;
         }
 
         return [
