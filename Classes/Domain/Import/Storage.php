@@ -435,6 +435,7 @@ class Storage
                         $galleryBeneathText = 8;
                         $fields['imageorient'] = $galleryBeneathText;
                         $fields['imagecols'] = (int)$element['content']['imagecols'];
+                        $fields['image_zoom'] = 1;
 
                         [$fields, $data] = $this->addSysFileReference(
                             explode(',', $element['content']['assets']),
