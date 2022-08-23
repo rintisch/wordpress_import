@@ -46,9 +46,7 @@ class Importer
     public function import(Import $import): int
     {
         $this->importFiles($import);
-
         $this->importPages($import);
-
         $this->postProcessContent($import);
 
         return 0;
@@ -111,7 +109,7 @@ class Importer
         $wpPagesParentMissing = [];
 
         foreach ($pages as $page) {
-            if ($mapping[$page['post_parent']]) {
+            if (array_key_exists($page['post_parent'], $mapping)) {
                 $page['pid'] = $mapping[$page['post_parent']];
                 $wpPagesParentExists[] = $page;
                 continue;
@@ -130,6 +128,10 @@ class Importer
 
             $seoData = $this->storage->getWpSeoData($page['ID']);
             $pid = $this->storage->createPage($page, $seoData);
+
+            if (!$page['post_content']) {
+                return;
+            }
 
             [$pageContent, $clusterMatrix] = $this->contentExtractor->extract($page['post_content']);
 

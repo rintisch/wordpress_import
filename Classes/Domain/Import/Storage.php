@@ -400,10 +400,17 @@ class Storage
 
         $counter = 1;
 
+        if (count($clusterMatrix) === 0) {
+            return;
+        }
+
         foreach ($clusterMatrix as $cluster) {
             $counter++;
             $fields = [];
             $fields['pid'] = $pid;
+
+            // No anchor by default, can be overwritten by headline.
+            $fields['sectionIndex'] = 0;
 
             $ceIdentifier = $this->getIdentifier((string)$counter);
 
@@ -416,12 +423,18 @@ class Storage
                         $fields['CType'] = 'textmedia';
                         $fields['header'] = $element['content']['text'];
                         $fields['header_layout'] = $element['content']['size'];
+                        $fields['sectionIndex'] = $element['content']['anchor'];
+
+                        // No spacing afterwards if it is a "headline-only" CE
+                        if (count($cluster) === 1) {
+                            $fields['space_after_class'] = 0;
+                        }
                         break;
 
                     case 'paragraph':
                         $fields['CType'] = 'textmedia';
                         $fields['bodytext'] =
-                            $fields['bodytext'] ?
+                            array_key_exists('bodytext', $fields) ?
                                 $fields['bodytext'] . $element['content']['text'] :
                                 $element['content']['text'];
                         break;
@@ -431,6 +444,7 @@ class Storage
                         $galleryBeneathText = 8;
                         $fields['imageorient'] = $galleryBeneathText;
                         $fields['imagecols'] = (int)$element['content']['imagecols'];
+                        $fields['image_zoom'] = 1;
 
                         [$fields, $data] = $this->addSysFileReference(
                             explode(',', $element['content']['assets']),
@@ -502,7 +516,7 @@ class Storage
 
             [$data, $newId] = $this->addImageReference($fileUid, $pid, $ceIdentifier, $data);
 
-            $fields['assets'] = $fields['assets'] ? $fields['assets'] . ',' . $newId : $newId;
+            $fields['assets'] = array_key_exists('assets', $fields) ? $fields['assets'] . ',' . $newId : $newId;
         }
 
         return [

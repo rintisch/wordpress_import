@@ -11,6 +11,11 @@ parameters:
 			path: Classes/Command/Import.php
 
 		-
+			message: "#^Parameter \\#1 \\$domElement of method Rintisch\\\\WordpressImport\\\\Domain\\\\Import\\\\ContentExtractor\\:\\:hasAnchor\\(\\) expects DOMElement, DOMNode given\\.$#"
+			count: 1
+			path: Classes/Domain/Import/ContentExtractor.php
+
+		-
 			message: "#^Cannot cast mixed to int\\.$#"
 			count: 6
 			path: Classes/Domain/Import/Storage.php
