@@ -409,6 +409,9 @@ class Storage
             $fields = [];
             $fields['pid'] = $pid;
 
+            // No anchor by default, can be overwritten by headline.
+            $fields['sectionIndex'] = 0;
+
             $ceIdentifier = $this->getIdentifier((string)$counter);
 
             foreach ($cluster as $index) {
@@ -420,6 +423,7 @@ class Storage
                         $fields['CType'] = 'textmedia';
                         $fields['header'] = $element['content']['text'];
                         $fields['header_layout'] = $element['content']['size'];
+                        $fields['sectionIndex'] = $element['content']['anchor'];
                         break;
 
                     case 'paragraph':

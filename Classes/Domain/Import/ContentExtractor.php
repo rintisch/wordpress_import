@@ -248,11 +248,14 @@ class ContentExtractor
             preg_match($pattern, $domElement->nodeName ?: '', $output_array);
             $headSize = $output_array[1];
 
+            $hasAnchor = $this->hasAnchor($domElement);
+
             $data[] = [
                 'type' => 'headline',
                 'content' => [
                     'size' => $headSize,
                     'text' => $domElement->nodeValue,
+                    'anchor' => $hasAnchor,
                 ]
             ];
         }
@@ -299,5 +302,14 @@ class ContentExtractor
             ];
         }
         return $data;
+    }
+
+    private function hasAnchor(\DOMNode $domElement): int
+    {
+        if($domElement->hasAttributes()) {
+            return $domElement->attributes->getNamedItem('id')->nodeName !== NULL ? 1 : 0;
+        }
+
+        return 0;
     }
 }
