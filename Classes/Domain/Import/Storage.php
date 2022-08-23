@@ -424,6 +424,11 @@ class Storage
                         $fields['header'] = $element['content']['text'];
                         $fields['header_layout'] = $element['content']['size'];
                         $fields['sectionIndex'] = $element['content']['anchor'];
+
+                        // No spacing afterwards if it is a "headline-only" CE
+                        if (count($cluster) === 1) {
+                            $fields['space_after_class'] = 0;
+                        }
                         break;
 
                     case 'paragraph':
